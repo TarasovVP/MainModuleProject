@@ -1,0 +1,3 @@
+[submodule "SubModuleProject"]
+	path = SubModuleProject
+	url = https://github.com/TarasovVP/SubModuleProject.git
