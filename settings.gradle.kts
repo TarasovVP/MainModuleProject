@@ -22,6 +22,7 @@ dependencyResolutionManagement {
 rootProject.name = "MainSubmoduleProject"
 include(":mainapp")
 include(":core")
+include(":inner")
 include(":submoduleproject")
 project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
  
