@@ -13,23 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Remove existing submodule
-        run: |
-          rm -rf SubModuleProject  # Удаление директории сабмодуля
-          git config --remove-section submodule.SubModuleProject || true  # Удаление записи сабмодуля из конфигурации
-
-      - name: Reinitialize submodule
-        run: |
-          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git SubModuleProject
-          git submodule update --init --recursive
-
-      - name: Wait for submodule to be ready
-        run: |
-          echo "Waiting for submodule to be fully initialized..."
-          for i in {1..5}; do
-            [ -d "SubModuleProject" ] && echo "Submodule ready." && break || echo "Retry $i" && sleep 5
-          done
-
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
