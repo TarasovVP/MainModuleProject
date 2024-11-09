@@ -23,7 +23,7 @@ rootProject.name = "MainSubmoduleProject"
 include(":mainapp")
 include(":inner")
 
-var submodulesUpdated = false
+/*var submodulesUpdated = false
 if (!submodulesUpdated) {
     val submodulePath = file("SubModuleProject")
     if (submodulePath.exists()) {
@@ -60,7 +60,7 @@ if (!submodulesUpdated) {
     include(":submoduleproject")
     project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
     submodulesUpdated = true
-}
+}*/
 
 include(":submoduleproject")
 project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
