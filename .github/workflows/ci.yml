@@ -13,6 +13,51 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Remove existing submodule
+        run: |
+          echo "Attempting to remove existing submodule 'SubModuleProject'..."
+          if [ -d "SubModuleProject" ]; then
+            rm -rf SubModuleProject
+            echo "Directory 'SubModuleProject' removed successfully."
+          else
+            echo "Directory 'SubModuleProject' not found; skipping removal."
+          fi
+          
+          git config --remove-section submodule.SubModuleProject || echo "Submodule configuration 'submodule.SubModuleProject' not found in .gitconfig; skipping removal."
+          echo "Existing submodule 'SubModuleProject' cleaned up."
+
+      - name: Reinitialize submodule
+        run: |
+          echo "Reinitializing submodule 'SubModuleProject'..."
+          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git SubModuleProject || {
+            echo "Error: Failed to add submodule 'SubModuleProject'. Please check if the URL is correct." >&2
+            exit 1
+          }
+          git submodule update --init --recursive || {
+            echo "Error: Failed to initialize and update 'SubModuleProject' recursively." >&2
+            exit 1
+          }
+          echo "Submodule 'SubModuleProject' reinitialized successfully."
+
+      - name: Wait for submodule to be ready
+        run: |
+          echo "Waiting for submodule 'SubModuleProject' to be fully initialized..."
+          for i in {1..5}; do
+            if [ -d "SubModuleProject" ]; then
+              echo "Submodule 'SubModuleProject' is ready."
+              break
+            else
+              echo "Retry $i: Submodule 'SubModuleProject' not yet initialized. Retrying in 5 seconds..."
+              sleep 5
+            fi
+          done
+          
+          if [ ! -d "SubModuleProject" ]; then
+            echo "Error: Submodule 'SubModuleProject' failed to initialize after multiple attempts." >&2
+            exit 1
+          fi
+          echo "Submodule 'SubModuleProject' is fully initialized and ready." 
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
