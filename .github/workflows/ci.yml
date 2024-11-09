@@ -1,0 +1,29 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Запуск при пуше в ветку main
+  pull_request:
+    branches:
+      - main  # Запуск для pull request в ветку main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # или 'zulu' для других дистрибуций
+          java-version: '17'      # Укажите нужную версию JDK
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Run tests
+        run: ./gradlew test
