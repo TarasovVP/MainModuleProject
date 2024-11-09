@@ -25,10 +25,10 @@ include(":inner")
 
 var submodulesUpdated = false
 if (!submodulesUpdated) {
-    val file = file("SubModuleProject")
-    if (file.exists()) {
+    val submodulePath = file("SubModuleProject")
+    if (submodulePath.exists()) {
         println("SubModuleProject exists.")
-        file.delete()
+        submodulePath.delete()
         println("SubModuleProject is deleted.")
     } else {
         println("SubModuleProject exists.")
@@ -41,6 +41,19 @@ if (!submodulesUpdated) {
         throw GradleException("Failed to update SubModuleProject")
     } else {
         println("SubModuleProject updated successfully.")
+    }
+    repeat(5) { attempt ->
+        if (submodulePath.exists() && submodulePath.list()?.isNotEmpty() == true) {
+            println("SubModuleProject is fully updated and ready.")
+            return@repeat 
+        } else {
+            println("Waiting for SubModuleProject to be ready... Attempt ${attempt + 1}/5")
+            Thread.sleep(2000)
+        }
+    }
+
+    if (submodulePath.list()?.isEmpty() == true) {
+        throw GradleException("SubModuleProject update did not complete as expected.")
     }
     include(":submoduleproject")
     project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
