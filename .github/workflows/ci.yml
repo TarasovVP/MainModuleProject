@@ -56,7 +56,15 @@ jobs:
             echo "Error: Submodule 'SubModuleProject' failed to initialize after multiple attempts." >&2
             exit 1
           fi
-          echo "Submodule 'SubModuleProject' is fully initialized and ready." 
+          echo "Submodule 'SubModuleProject' is fully initialized and ready."
+
+      - name: Verify Submodule Initialization
+        run: |
+          if [ ! -d "SubModuleProject" ]; then
+            echo "Error: SubModuleProject directory not found after reinitialization." >&2
+            exit 1
+          fi
+          echo "SubModuleProject is initialized."
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
