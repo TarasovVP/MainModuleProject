@@ -55,7 +55,7 @@ jobs:
           git submodule update --init --recursive --remote
           echo "Waiting for submodules to be ready..."
           for i in {1..5}; do
-            [ -d "path/to/submodule" ] && echo "Submodule ready." && break || echo "Retry $i" && sleep 5
+            [ -d "SubModuleProject" ] && echo "Submodule ready." && break || echo "Retry $i" && sleep 5
           done
 
       - name: Build project
