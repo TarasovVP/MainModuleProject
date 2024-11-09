@@ -42,6 +42,8 @@ if (!submodulesUpdated) {
     } else {
         println("SubModuleProject updated successfully.")
     }
+    include(":submoduleproject")
+    project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
     submodulesUpdated = true
 }
 
