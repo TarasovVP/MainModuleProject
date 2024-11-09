@@ -48,12 +48,14 @@ if (!submodulesUpdated) {
             return@repeat 
         } else {
             println("Waiting for SubModuleProject to be ready... Attempt ${attempt + 1}/5")
-            Thread.sleep(2000)
+            Thread.sleep(5000)
         }
     }
 
     if (submodulePath.list()?.isEmpty() == true) {
         throw GradleException("SubModuleProject update did not complete as expected.")
+    } else {
+        println("SubModuleProject is fully updated and ready(final).")
     }
     include(":submoduleproject")
     project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
