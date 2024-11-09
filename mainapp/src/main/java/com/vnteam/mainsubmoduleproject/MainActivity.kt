@@ -24,7 +24,6 @@ class MainActivity : ComponentActivity() {
         val mainModuleText = mainModuleClass.textFromMainModule()
         val mainInnerModuleClass = MainInnerModuleClass()
         val mainInnerModuleText = mainInnerModuleClass.textFromMainInnerModule()
-        val mainCoreModuleText = mainModuleClass.coreModuleTextFromMainModule()
         val subModuleClass = SubModuleClass()
         val subModuleText = subModuleClass.textFromSubModule()
         val subCoreModuleText = subModuleClass.coreModuleTextFromSubModule()
@@ -35,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     Greeting(
                         mainModuleText = "Text from MainModule $mainModuleText",
                         mainInnerModuleText = "Text from MainInnerModule $mainInnerModuleText",
-                        mainCoreModuleText = "Core text from MainModule $mainCoreModuleText",
+                        mainCoreModuleText = "",
                         subModuleText = "Text from SubModule $subModuleText",
                         subCoreModuleText = "Core text from SubModule $subCoreModuleText",
                         modifier = Modifier.padding(innerPadding)

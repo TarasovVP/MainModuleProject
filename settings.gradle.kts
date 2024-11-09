@@ -34,14 +34,6 @@ if (!submodulesUpdated) {
         } else {
             println("SubModuleProject cloned successfully")
         }
-        val coreCloneResult = exec {
-            commandLine("git", "clone", "--recurse-submodules", "https://github.com/TarasovVP/core-repo.git", "core")
-        }.exitValue
-        if (coreCloneResult != 0) {
-            throw GradleException("Failed to clone core")
-        } else {
-            println("Core cloned successfully")
-        }
     } else {
         println("SubModuleProject directory found. Updating...")
         val updateResult = exec {
@@ -56,7 +48,7 @@ if (!submodulesUpdated) {
     }
     submodulesUpdated = true
 }*/
-include(":core")
+
 include(":submoduleproject")
 project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
  
