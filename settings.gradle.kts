@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 rootProject.name = "MainSubmoduleProject"
 include(":mainapp")
 include(":inner")
-/*var submodulesUpdated = false
+var submodulesUpdated = false
 if (!submodulesUpdated) {
     if (!file("SubModuleProject").exists()) {
         println("SubModuleProject directory not found. Cloning...")
@@ -47,8 +47,7 @@ if (!submodulesUpdated) {
         }
     }
     submodulesUpdated = true
-}*/
+}
 
 include(":submoduleproject")
 project(":submoduleproject").projectDir = file("$rootDir/submoduleproject/app")
- 
