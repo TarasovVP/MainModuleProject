@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vnteam.mainsubmoduleproject"
+    namespace = "com.vnteam.mainsubmoduleproject.inner"
     compileSdk = 34
 
     defaultConfig {

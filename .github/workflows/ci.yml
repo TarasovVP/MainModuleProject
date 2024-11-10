@@ -25,21 +25,10 @@ jobs:
             api-level: 33
             build-tools: '33.0.0'
 
-      - name: Remove existing submodule directories
-        run: |
-          rm -rf .git/modules/submoduleproject
-          rm -rf submoduleproject
-          rm -rf submoduleproject
-
-      - name: Reinitialize submodule
-        run: |
-          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git submoduleproject
-          git submodule update --init --recursive
-
       - name: Synchronize submodules
         run: |
           git submodule sync
-          git submodule update --init --recursive
+          git submodule update --init --recursive --remote
 
       - name: Verify submodule path and status
         run: |
@@ -69,5 +58,5 @@ jobs:
       - name: Assemble submoduleproject
         run: ./gradlew :submoduleproject:build
 
-      - name: Run Unit Tests
+      - name: Build project
         run: ./gradlew build --no-daemon
