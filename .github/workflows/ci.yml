@@ -19,10 +19,14 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Remove existing submodule directories
+      - name: Remove all existing submodule directories
         run: |
-          rm -rf .git/modules/submoduleproject
-          rm -rf submoduleproject
+          echo "Removing all submodule directories..."
+          git submodule foreach 'rm -rf $name && rm -rf .git/modules/$name || true'
+          git config -l | grep '^submodule' | while read -r config; do
+            section=$(echo $config | cut -d'=' -f1)
+            git config --remove-section $section || true
+          done
 
       - name: Reinitialize submodule
         run: |
