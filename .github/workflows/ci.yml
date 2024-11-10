@@ -27,6 +27,7 @@ jobs:
 
       - name: Update submodules
         run: |
+          git submodule sync
           git submodule update --init --recursive
 
       - name: Verify Submodule Initialization
@@ -41,14 +42,10 @@ jobs:
           echo "Listing available Gradle tasks for SubModuleProject:"
           ./gradlew -p SubModuleProject tasks --all
 
-      - name: Verify Path to Submodule
+      - name: Verify submodule directory structure
         run: |
-          if [ ! -d "SubModuleProject" ]; then
-          echo "Error: Directory SubModuleProject does not exist." >&2
-          exit 1
-          fi
-          echo "SubModuleProject directory exists at the expected path."
-
+          echo "Contents of submoduleproject directory:"
+          ls -R "$GITHUB_WORKSPACE/submoduleproject"
 
       - name: List included modules
         run: ./gradlew listModules
