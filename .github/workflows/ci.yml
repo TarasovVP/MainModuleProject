@@ -30,17 +30,23 @@ jobs:
           git submodule sync
           git submodule update --init --recursive
 
-      - name: Verify Submodule Initialization
+      - name: Verify submodule initialization
         run: |
-          if [ ! -d "SubModuleProject" ]; then
-            echo "Error: SubModuleProject directory not found after reinitialization." >&2
+          if [ -d "submoduleproject" ]; then
+            echo "Submodule 'submoduleproject' exists after initialization."
+          else
+            echo "Error: Submodule 'submoduleproject' not found after initialization." >&2
             exit 1
           fi
-          echo "SubModuleProject is initialized."
-          echo "Listing contents of SubModuleProject:"
-          find SubModuleProject -type d
-          echo "Listing available Gradle tasks for SubModuleProject:"
-          ./gradlew -p SubModuleProject tasks --all
+
+      - name: Verify submodule initialization
+        run: |
+          if [ -d "submoduleproject" ]; then
+            echo "Submodule 'submoduleproject' exists after initialization."
+          else
+            echo "Error: Submodule 'submoduleproject' not found after initialization." >&2
+            exit 1
+            fi
 
       - name: Verify submodule directory structure
         run: |
