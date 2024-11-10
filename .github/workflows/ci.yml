@@ -25,19 +25,28 @@ jobs:
             api-level: 33
             build-tools: '33.0.0'
 
-      - name: Update submodules
+      - name: Remove and reinitialize submodule
+        run: |
+          git submodule deinit -f --all
+          git rm -rf submoduleproject
+          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git submoduleproject
+          git submodule update --init --recursive
+
+      - name: Synchronize submodules
         run: |
           git submodule sync
           git submodule update --init --recursive
 
-      - name: Verify submodule initialization
+      - name: Verify submodule path and status
         run: |
+          git submodule status
           if [ -d "submoduleproject" ]; then
-            echo "Submodule 'submoduleproject' exists after initialization."
+            echo "Submodule 'submoduleproject' is present after initialization."
+            ls -l submoduleproject
           else
-            echo "Error: Submodule 'submoduleproject' not found after initialization." >&2
+            echo "Error: Submodule 'submoduleproject' is not present after initialization." >&2
             exit 1
-            fi
+          fi
 
       - name: Verify submodule directory structure
         run: |
