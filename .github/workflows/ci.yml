@@ -16,19 +16,30 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-            distribution: 'zulu'
-            java-version: '17'
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
-            api-level: 33
-            build-tools: '33.0.0'
+          api-level: 33
+          build-tools: '33.0.0'
+
+      - name: Remove existing submodule directories
+        run: |
+          rm -rf .git/modules/submoduleproject
+          rm -rf submoduleproject
+          rm -rf submoduleproject
+
+      - name: Reinitialize submodule
+        run: |
+          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git submoduleproject
+          git submodule update --init --recursive
 
       - name: Synchronize submodules
         run: |
           git submodule sync
-          git submodule update --init --recursive --remote
+          git submodule update --init --recursive
 
       - name: Verify submodule path and status
         run: |
@@ -50,6 +61,7 @@ jobs:
         run: |
           echo "Listing all directories and files in the project root:"
           ls -R "$GITHUB_WORKSPACE"
+
 
       - name: List included modules
         run: ./gradlew listModules
