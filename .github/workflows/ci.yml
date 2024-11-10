@@ -31,6 +31,12 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 33
+          build-tools: '33.0.0'
+
       - name: List included modules
         run: ./gradlew listModules
 
