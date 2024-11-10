@@ -44,5 +44,8 @@ jobs:
       - name: List included modules
         run: ./gradlew listModules
 
+      - name: Assemble submoduleproject
+        run: ./gradlew :submoduleproject:assembleDebug
+
       - name: Run Unit Tests
         run: ./gradlew build
