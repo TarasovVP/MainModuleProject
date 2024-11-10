@@ -24,6 +24,8 @@ jobs:
             exit 1
           fi
           echo "SubModuleProject is initialized."
+          echo "Listing contents of SubModuleProject:"
+          find SubModuleProject -type d
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
