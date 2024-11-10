@@ -37,21 +37,18 @@ jobs:
           else
             echo "Error: Submodule 'submoduleproject' not found after initialization." >&2
             exit 1
-          fi
-
-      - name: Verify submodule initialization
-        run: |
-          if [ -d "submoduleproject" ]; then
-            echo "Submodule 'submoduleproject' exists after initialization."
-          else
-            echo "Error: Submodule 'submoduleproject' not found after initialization." >&2
-            exit 1
             fi
 
       - name: Verify submodule directory structure
         run: |
           echo "Contents of submoduleproject directory:"
           ls -R "$GITHUB_WORKSPACE/submoduleproject"
+
+      - name: List all directories and files
+        run: |
+          echo "Listing all directories and files in the project root:"
+          ls -R "$GITHUB_WORKSPACE"
+
 
       - name: List included modules
         run: ./gradlew listModules
