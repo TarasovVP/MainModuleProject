@@ -13,6 +13,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+            distribution: 'zulu'
+            java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+            api-level: 33
+            build-tools: '33.0.0'
+
       - name: Update submodules
         run: |
           git submodule update --init --recursive
@@ -28,18 +40,6 @@ jobs:
           find SubModuleProject -type d
           echo "Listing available Gradle tasks for SubModuleProject:"
           ./gradlew -p SubModuleProject tasks --all
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: 33
-          build-tools: '33.0.0'
 
       - name: List included modules
         run: ./gradlew listModules
