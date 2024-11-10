@@ -27,24 +27,15 @@ jobs:
           api-level: 33
           build-tools: '33.0.0'
 
-      - name: Remove all existing submodule directories
+      - name: Remove existing submodule directories
         run: |
-          echo "Removing all submodule directories..."
-          git submodule foreach 'rm -rf $name && rm -rf .git/modules/$name || true'
-          git config -l | grep '^submodule' | while read -r config; do
-            section=$(echo $config | cut -d'=' -f1)
-          git config --remove-section $section || true
-          done
+          rm -rf .git/modules/submoduleproject
+          rm -rf submoduleproject
+          rm -rf submoduleproject
 
-      - name: Reinitialize all submodules
+      - name: Reinitialize submodule
         run: |
-          echo "Reinitializing all submodules..."
-          git submodule update --init --recursive
-          git submodule foreach 'echo "Submodule $name initialized."'
-
-      - name: Synchronize submodules
-        run: |
-          git submodule sync
+          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git submoduleproject
           git submodule update --init --recursive
 
       - name: Verify submodule path and status
