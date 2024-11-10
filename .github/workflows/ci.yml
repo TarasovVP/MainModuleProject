@@ -25,11 +25,15 @@ jobs:
             api-level: 33
             build-tools: '33.0.0'
 
-      - name: Remove and reinitialize submodule
+      - name: Remove existing submodule directories
         run: |
-          git submodule deinit -f --all
-          git rm -rf submoduleproject
-          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git submoduleproject
+          rm -rf .git/modules/SubModuleProject
+          rm -rf SubModuleProject
+          rm -rf submoduleproject
+
+      - name: Reinitialize submodule
+        run: |
+          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git SubModuleProject
           git submodule update --init --recursive
 
       - name: Synchronize submodules
