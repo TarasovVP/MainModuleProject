@@ -27,13 +27,13 @@ jobs:
 
       - name: Remove existing submodule directories
         run: |
-          rm -rf .git/modules/SubModuleProject
-          rm -rf SubModuleProject
+          rm -rf .git/modules/submoduleproject
+          rm -rf submoduleproject
           rm -rf submoduleproject
 
       - name: Reinitialize submodule
         run: |
-          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git SubModuleProject
+          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git submoduleproject
           git submodule update --init --recursive
 
       - name: Synchronize submodules
