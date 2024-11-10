@@ -41,6 +41,15 @@ jobs:
           echo "Listing available Gradle tasks for SubModuleProject:"
           ./gradlew -p SubModuleProject tasks --all
 
+      - name: Verify Path to Submodule
+        run: |
+          if [ ! -d "SubModuleProject" ]; then
+          echo "Error: Directory SubModuleProject does not exist." >&2
+          exit 1
+          fi
+          echo "SubModuleProject directory exists at the expected path."
+
+
       - name: List included modules
         run: ./gradlew listModules
 
