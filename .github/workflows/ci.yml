@@ -13,15 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
       - name: Remove all existing submodule directories
         run: |
-          echo "Removing all submodule directories..."
           git submodule foreach 'rm -rf $name && rm -rf .git/modules/$name || true'
           git config -l | grep '^submodule' | while read -r config; do
             section=$(echo $config | cut -d'=' -f1)
