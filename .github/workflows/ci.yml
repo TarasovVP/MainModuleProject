@@ -27,5 +27,49 @@ jobs:
           api-level: 33
           build-tools: '33.0.0'
 
+      - name: Remove existing submodule directories
+        run: |
+          rm -rf .git/modules/submoduleproject
+          rm -rf submoduleproject
+          rm -rf submoduleproject
+
+      - name: Reinitialize submodule
+        run: |
+          git submodule add --force https://github.com/TarasovVP/SubModuleProject.git submoduleproject
+          git submodule update --init --recursive
+
+      - name: Synchronize submodules
+        run: |
+          git submodule sync
+          git submodule update --init --recursive
+
+      - name: Verify submodule path and status
+        run: |
+          git submodule status
+          if [ -d "submoduleproject" ]; then
+            echo "Submodule 'submoduleproject' is present after initialization."
+            ls -l submoduleproject
+          else
+            echo "Error: Submodule 'submoduleproject' is not present after initialization." >&2
+            exit 1
+          fi
+
+      - name: Verify submodule directory structure
+        run: |
+          echo "Contents of submoduleproject directory:"
+          ls -R "$GITHUB_WORKSPACE/submoduleproject"
+
+      - name: List all directories and files
+        run: |
+          echo "Listing all directories and files in the project root:"
+          ls -R "$GITHUB_WORKSPACE"
+
+
+      - name: List included modules
+        run: ./gradlew listModules
+
+      - name: Assemble submoduleproject
+        run: ./gradlew :submoduleproject:build
+
       - name: Build project
         run: ./gradlew build --no-daemon
