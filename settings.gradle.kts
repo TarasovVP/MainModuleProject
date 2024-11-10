@@ -63,4 +63,4 @@ if (!submodulesUpdated) {
 }*/
 
 include(":submoduleproject")
-project(":submoduleproject").projectDir = file("submoduleproject/app")
+project(":submoduleproject").projectDir = file("SubModuleProject/app")
