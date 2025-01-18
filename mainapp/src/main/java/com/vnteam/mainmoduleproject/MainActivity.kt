@@ -1,41 +1,38 @@
-package com.vnteam.mainsubmoduleproject
+package com.vnteam.mainmoduleproject
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.vnteam.core.MainInnerModuleClass
-import com.vnteam.mainsubmoduleproject.ui.theme.MainSubmoduleProjectTheme
+import androidx.compose.ui.unit.dp
+import com.vnteam.mainmoduleproject.ui.theme.MainSubmoduleProjectTheme
 import com.vnteam.submoduleproject.ui.SubModuleClass
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val mainModuleClass = MainModuleClass()
-        val mainModuleText = mainModuleClass.textFromMainModule()
-        val mainInnerModuleClass = MainInnerModuleClass()
-        val mainInnerModuleText = mainInnerModuleClass.textFromMainInnerModule()
         val subModuleClass = SubModuleClass()
-        val subModuleText = subModuleClass.textFromSubModule()
-        val subCoreModuleText = subModuleClass.coreModuleTextFromSubModule()
         enableEdgeToEdge()
         setContent {
             MainSubmoduleProjectTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        mainModuleText = "Text from MainModule $mainModuleText",
-                        mainInnerModuleText = "Text from MainInnerModule $mainInnerModuleText",
-                        mainCoreModuleText = "",
-                        subModuleText = "Text from SubModule $subModuleText",
-                        subCoreModuleText = "Core text from SubModule $subCoreModuleText",
+                        mainModuleText = mainModuleClass.textFromMainModule(),
+                        subModuleText = subModuleClass.textFromSubModule(),
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -47,36 +44,20 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(
     mainModuleText: String,
-    mainInnerModuleText: String,
-    mainCoreModuleText: String,
     subModuleText: String,
-    subCoreModuleText: String,
     modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(verticalArrangement = Arrangement.Center, modifier = modifier.fillMaxSize()) {
         Text(
             text = mainModuleText,
-            modifier = modifier
-        )
-
-        Text(
-            text = mainInnerModuleText,
-            modifier = modifier
-        )
-
-        Text(
-            text = mainCoreModuleText,
-            modifier = modifier
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth().height(100.dp)
         )
 
         Text(
             text = subModuleText,
-            modifier = modifier
-        )
-
-        Text(
-            text = subCoreModuleText,
-            modifier = modifier
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth().height(100.dp)
         )
     }
 }
@@ -85,6 +66,6 @@ fun Greeting(
 @Composable
 fun GreetingPreview() {
     MainSubmoduleProjectTheme {
-        Greeting("Android", "sdsd","sdsd", "dssds", "sasds")
+        Greeting("Text from main module", "Text from submodule", Modifier)
     }
 }

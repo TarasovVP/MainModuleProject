@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.vnteam.mainsubmoduleproject"
+    namespace = "com.vnteam.mainmoduleproject"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.vnteam.mainsubmoduleproject"
+        applicationId = "com.vnteam.mainmoduleproject"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
@@ -67,6 +67,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(project(":inner"))
     implementation(project(":submoduleproject"))
 }

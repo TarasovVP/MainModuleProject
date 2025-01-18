@@ -1,4 +1,4 @@
-package com.vnteam.mainsubmoduleproject
+package com.vnteam.mainmoduleproject
 
 import org.junit.Test
 

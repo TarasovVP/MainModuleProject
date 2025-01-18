@@ -1,4 +1,4 @@
-package com.vnteam.mainsubmoduleproject.ui.theme
+package com.vnteam.mainmoduleproject.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
