@@ -9,7 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/inner" />
             <option value="$PROJECT_DIR$/mainapp" />
             <option value="$PROJECT_DIR$/submoduleproject/app" />
           </set>
